@@ -1,6 +1,6 @@
 # Reponse Gathering Script
 
-This repository contains a script for gathering responses from ChatGPT and produce a file with the responses.
+This repository contains a script for gathering responses from ChatGPT API and produce a file with the responses.
 
 ## Installation
 

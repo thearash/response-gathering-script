@@ -70,7 +70,6 @@ async function main() {
               "role": "user", "content": prompt,
             }]
           })
-          console.log(completion.data.choices)
           response = completion.data.choices[0].message?.content.toString() || ''
         } catch (e) {
           const errorLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${teamName} - character: ${character} - trial: ${i + 1} - error: ${e}`
@@ -84,7 +83,7 @@ async function main() {
           continue
         }
 
-        const trialLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${teamName} - character: ${character} - trial: ${i + 1}`
+        const trialLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${teamName} - character: ${character} - trial: ${i + 1} - Success`
         await appendLog(logFolderPath, trialLog)
 
         const filePath = path.posix.join(characterFolderPath, `${teamName}_${character}_${i + 1}.txt`)
