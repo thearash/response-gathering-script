@@ -8,6 +8,7 @@ import path from 'path'
 
 dotenv.config()
 
+const STAGE = 'raw'
 const CHARACTER_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
   'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
   'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -47,11 +48,17 @@ async function main() {
     if (!fs.existsSync(teamFolderPath)) {
       await fs.promises.mkdir(teamFolderPath)
     }
+
+    const stageFolderPath = path.posix.join(teamFolderPath, STAGE)
+    if (!fs.existsSync(stageFolderPath)) {
+      await fs.promises.mkdir(stageFolderPath)
+    }
+
     const teamLog = `[${new Date().toISOString().replaceAll(':', '_')}] Processing - team: ${teamName}`
     await appendLog(logFolderPath, teamLog)
 
     for (const character of CHARACTER_LIST) {
-      const characterFolderPath = path.posix.join(teamFolderPath, character)
+      const characterFolderPath = path.posix.join(stageFolderPath, character)
       if (!fs.existsSync(characterFolderPath)) {
         await fs.promises.mkdir(characterFolderPath)
       }

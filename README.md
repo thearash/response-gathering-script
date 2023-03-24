@@ -14,7 +14,7 @@ To use this script, you must have <a href="https://nodejs.org/en/" target="_new"
 ## Usage
 
 1. Run the script using the command `npm start -s="<SOURCE_FOLDER>"`. For example, `npm start -s="./competition"`.
-2. The script will output response files in `../<SOURCE_FOLDER>/competition/<TEAM_NAME>/<CHARACTER>` folder. The file `response_log_<DATE_TIME>.txt` will be created in the `../<SOURCE_FOLDER>/competition/logs` folder.
+2. The script will output response files in `../<SOURCE_FOLDER>/competition/<TEAM_NAME>/raw/<CHARACTER>` folder. The file `response_log_<DATE_TIME>.txt` will be created in the `../<SOURCE_FOLDER>/competition/logs` folder.
 
 Please ensure that the source folder contains only text files.
 
