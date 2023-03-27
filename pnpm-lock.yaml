@@ -1,11 +1,10 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/minimist': ^1.2.2
   '@types/node': ^18.15.5
+  chatgpt4pcg-node: ^1.0.0
   dotenv: ^16.0.3
   eslint: ^8.36.0
-  minimist: ^1.2.8
   nodemon: ^2.0.21
   openai: ^3.2.1
   rimraf: ^4.4.0
@@ -13,13 +12,12 @@ specifiers:
   typescript: ^5.0.2
 
 dependencies:
+  chatgpt4pcg-node: 1.0.0
   dotenv: 16.0.3
-  minimist: 1.2.8
   openai: 3.2.1
   typescript: 5.0.2
 
 devDependencies:
-  '@types/minimist': 1.2.2
   '@types/node': 18.15.6
   eslint: 8.36.0
   nodemon: 2.0.22
@@ -145,10 +143,6 @@ packages:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: true
 
-  /@types/minimist/1.2.2:
-    resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
-    dev: true
-
   /@types/node/18.15.6:
     resolution: {integrity: sha512-YErOafCZpK4g+Rp3Q/PBgZNAsWKGunQTm9FA3/Pbcm0VCriTEzcrutQ/SxSc0rytAp0NoFWue669jmKhEtd0sA==}
     dev: true
@@ -266,6 +260,12 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /chatgpt4pcg-node/1.0.0:
+    resolution: {integrity: sha512-qkOjFiGPZ9BulAAd3v8xXaRLRQ5M0yp6G0QhDDHJZeuozym8sEduvuDbrDO263Fxpv7tpf4+QKeYvxb9vQmMvw==}
+    dependencies:
+      minimist: 1.2.8
+    dev: false
 
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
