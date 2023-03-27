@@ -19,3 +19,11 @@ To use this script, you must have <a href="https://nodejs.org/en/" target="_new"
 Please ensure that the source folder contains only text files.
 
 Please note that interacting with ChatGPT via API costs money. Please refer to [this page](https://openai.com/pricing) for more information.
+
+## Contributing
+
+If you would like to contribute to this project, please fork this repository and submit a pull request. Please ensure that your code is well documented and that you have tested your code before submitting a pull request.
+
+## Bug Reporting
+
+If you find any bugs, please submit an issue on this repository.
