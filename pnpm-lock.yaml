@@ -1,28 +1,28 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/node': ^18.15.5
-  chatgpt4pcg-node: ^1.0.0
+  '@types/node': ^18.15.10
+  chatgpt4pcg-node: ^1.0.1
   dotenv: ^16.0.3
   eslint: ^8.36.0
-  nodemon: ^2.0.21
+  nodemon: ^2.0.22
   openai: ^3.2.1
-  rimraf: ^4.4.0
+  rimraf: ^4.4.1
   ts-node: ^10.9.1
   typescript: ^5.0.2
 
 dependencies:
-  chatgpt4pcg-node: 1.0.0
+  chatgpt4pcg-node: 1.0.1
   dotenv: 16.0.3
   openai: 3.2.1
   typescript: 5.0.2
 
 devDependencies:
-  '@types/node': 18.15.6
+  '@types/node': 18.15.10
   eslint: 8.36.0
   nodemon: 2.0.22
   rimraf: 4.4.1
-  ts-node: 10.9.1_scf5ll4phrufleolbwuhaaa4ae
+  ts-node: 10.9.1_zd7fjxbseldtiwc6h6ujrbvxuy
 
 packages:
 
@@ -143,8 +143,8 @@ packages:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: true
 
-  /@types/node/18.15.6:
-    resolution: {integrity: sha512-YErOafCZpK4g+Rp3Q/PBgZNAsWKGunQTm9FA3/Pbcm0VCriTEzcrutQ/SxSc0rytAp0NoFWue669jmKhEtd0sA==}
+  /@types/node/18.15.10:
+    resolution: {integrity: sha512-9avDaQJczATcXgfmMAW3MIWArOO7A+m90vuCFLr8AotWf8igO/mRoYukrk2cqZVtv38tHs33retzHEilM7FpeQ==}
     dev: true
 
   /abbrev/1.1.1:
@@ -261,8 +261,8 @@ packages:
       supports-color: 7.2.0
     dev: true
 
-  /chatgpt4pcg-node/1.0.0:
-    resolution: {integrity: sha512-qkOjFiGPZ9BulAAd3v8xXaRLRQ5M0yp6G0QhDDHJZeuozym8sEduvuDbrDO263Fxpv7tpf4+QKeYvxb9vQmMvw==}
+  /chatgpt4pcg-node/1.0.1:
+    resolution: {integrity: sha512-yBw03Is5LGOApw481wFNZ/gZ8rna+OSAORaj0faKrFrmgoTQukh8S4paReJMhV2eCuufgWu7ofbcPfB0dagwng==}
     dependencies:
       minimist: 1.2.8
     dev: false
@@ -999,7 +999,7 @@ packages:
       nopt: 1.0.10
     dev: true
 
-  /ts-node/10.9.1_scf5ll4phrufleolbwuhaaa4ae:
+  /ts-node/10.9.1_zd7fjxbseldtiwc6h6ujrbvxuy:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -1018,7 +1018,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.15.6
+      '@types/node': 18.15.10
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3
