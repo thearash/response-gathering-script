@@ -5,5 +5,6 @@ CREATE TABLE "PromptRequest" (
     "character" TEXT NOT NULL,
     "trial" INTEGER NOT NULL,
     "prompt" TEXT NOT NULL,
-    "characterFolderPath" TEXT NOT NULL
+    "characterFolderPath" TEXT NOT NULL,
+    "isCompleted" BOOLEAN NOT NULL DEFAULT false
 );

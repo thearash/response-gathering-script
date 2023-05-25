@@ -180,3 +180,5 @@ build/*
 competition/*
 prompts/*
 qualified/*
+
+prisma/dev.db

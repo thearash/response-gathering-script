@@ -11,10 +11,11 @@ datasource db {
 }
 
 model PromptRequest {
-  id                  String @id
+  id                  String  @id
   teamName            String
   character           String
   trial               Int
   prompt              String
   characterFolderPath String
+  isCompleted         Boolean @default(false)
 }

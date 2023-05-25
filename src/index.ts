@@ -8,11 +8,14 @@ import path from 'path'
 
 const prisma = new PrismaClient()
 
+const PHASE = 'midterm'
 const CURRENT_STAGE = 'raw'
-const CHARACTER_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
-  'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-  'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-const NUM_TRIALS = 10
+// const CHARACTER_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
+//   'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+//   'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+const CHARACTER_LIST = ['A', 'B', 'C']
+// const NUM_TRIALS = 10
+const NUM_TRIALS = 4
 const OBJECT_TOKEN = '<OBJECT>'
 
 async function main() {
@@ -97,7 +100,7 @@ async function processTrials(prompt: string, logFolderPath: string, teamName: st
     try {
       await prisma.promptRequest.create({
         data: {
-          id: `${teamName}_${character}_${i + 1}`,
+          id: `${PHASE}_${teamName}_${character}_${i + 1}`,
           teamName,
           character,
           prompt,
@@ -118,6 +121,9 @@ const MAX_PARALLEL_REQUEST = 10
 let count = 0
 async function processDataCollection(openai: OpenAIApi, logFolderPath: string) {
   const promptRequests = await prisma.promptRequest.findMany({
+    where: {
+      isCompleted: false
+    },
     take: MAX_PARALLEL_REQUEST - count
   })
 
@@ -130,9 +136,12 @@ async function processDataCollection(openai: OpenAIApi, logFolderPath: string) {
       } catch (e) {
       } finally {
         count -= promptRequests.length
-        await prisma.promptRequest.delete({
+        await prisma.promptRequest.update({
           where: {
             id
+          },
+          data: {
+            isCompleted: true
           }
         })
       }
