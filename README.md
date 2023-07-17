@@ -17,6 +17,8 @@ To use this script, you must have <a href="https://nodejs.org/en/" target="_new"
 1. Run the script using the command `npm start -s="<SOURCE_FOLDER>"`. For example, `npm start -s="./competition"`.
 2. The script will output response files in `../<SOURCE_FOLDER>/competition/<TEAM_NAME>/raw/<CHARACTER>` folder. The file `response_log_<DATE_TIME>.txt` will be created in the `../<SOURCE_FOLDER>/competition/logs` folder.
 
+**You might need to run the script at least *twice* to ensure that all responses are generated correctly.**
+
 Please ensure that the source folder contains only text files.
 
 Please note that interacting with ChatGPT via API costs money. Please refer to [this page](https://openai.com/pricing) for more information.

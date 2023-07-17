@@ -168,7 +168,7 @@ async function collectData(openai: OpenAIApi, prompt: string, characterFolderPat
         "role": "user", "content": prompt,
       }]
     })
-    response = completion.data.choices[0].message?.content.toString() || ''
+    response = completion.data.choices[0].message?.content?.toString() || ''
   } catch (e) {
     const errorLog = `[${new Date().toISOString()}] Processing - team: ${teamName} - character: ${character} - trial: ${trialNumber} - error: ${e}`
     await appendLog(logFolderPath, CURRENT_STAGE, errorLog)
