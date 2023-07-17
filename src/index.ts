@@ -146,13 +146,18 @@ async function processDataCollection(openai: OpenAIApi, logFolderPath: string) {
     }))
   }
 
-  const completedRecordsCount = await prisma.promptRequest.count({
-    where: { isCompleted: true },
-  });
+  let allRecordsCompleted = false;
+  try {
+    const completedRecordsCount = await prisma.promptRequest.count({
+      where: { isCompleted: true },
+    });
 
-  const allRecordsCount = await prisma.promptRequest.count();
+    const allRecordsCount = await prisma.promptRequest.count();
 
-  const allRecordsCompleted = completedRecordsCount === allRecordsCount;
+    allRecordsCompleted = completedRecordsCount === allRecordsCount;
+  } catch (e) {
+    allRecordsCompleted = false;
+  }
 
   if (!allRecordsCompleted) {
     await processDataCollection(openai, logFolderPath)
