@@ -8,7 +8,7 @@ import path from 'path'
 
 const prisma = new PrismaClient()
 
-const PHASE = 'midterm'
+const PHASE = 'final'
 const CURRENT_STAGE = 'raw'
 const CHARACTER_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
   'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
@@ -144,7 +144,17 @@ async function processDataCollection(openai: OpenAIApi, logFolderPath: string) {
         })
       }
     }))
+  }
 
+  const completedRecordsCount = await prisma.promptRequest.count({
+    where: { isCompleted: true },
+  });
+
+  const allRecordsCount = await prisma.promptRequest.count();
+
+  const allRecordsCompleted = completedRecordsCount === allRecordsCount;
+
+  if (!allRecordsCompleted) {
     await processDataCollection(openai, logFolderPath)
   }
 }
