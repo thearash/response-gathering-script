@@ -10,6 +10,7 @@ To use this script, you must have <a href="https://nodejs.org/en/" target="_new"
 2. Navigate to the repository directory in your terminal.
 3. Run `npm install` to install the necessary dependencies.
 4. Copy `.env.example` to `.env` and fill in the `OPENAI_API_KEY` which can be obtained by following [this page](https://platform.openai.com/docs/api-reference/making-requests).
+5. Run `npx prisma migrate dev --name init` to initialize database and sync with Prisma.
 
 ## Usage
 
