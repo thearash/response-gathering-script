@@ -16,6 +16,10 @@ const CHARACTER_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G',
 const NUM_TRIALS = 10
 const OBJECT_TOKEN = '<OBJECT>'
 
+function delay(time: number) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
 async function main() {
   dotenv.config()
 
@@ -115,25 +119,22 @@ async function processTrials(prompt: string, logFolderPath: string, teamName: st
   }
 }
 
-const MAX_PARALLEL_REQUEST = 10
-let count = 0
 async function processDataCollection(openai: OpenAIApi, logFolderPath: string) {
   const promptRequests = await prisma.promptRequest.findMany({
     where: {
       isCompleted: false
     },
-    take: MAX_PARALLEL_REQUEST - count
+    take: 1
   })
 
   if (promptRequests.length !== 0) {
-    count += promptRequests.length
     await Promise.all(promptRequests.map(async (promptRequest) => {
       const { id, teamName, character, prompt, trial, characterFolderPath } = promptRequest
       try {
         await collectData(openai, prompt, characterFolderPath, logFolderPath, teamName, character, trial)
+        delay(7000)
       } catch (e) {
       } finally {
-        count -= promptRequests.length
         await prisma.promptRequest.update({
           where: {
             id
@@ -146,18 +147,13 @@ async function processDataCollection(openai: OpenAIApi, logFolderPath: string) {
     }))
   }
 
-  let allRecordsCompleted = false;
-  try {
-    const completedRecordsCount = await prisma.promptRequest.count({
-      where: { isCompleted: true },
-    });
+  const completedRecordsCount = await prisma.promptRequest.count({
+    where: { isCompleted: true },
+  });
 
-    const allRecordsCount = await prisma.promptRequest.count();
+  const allRecordsCount = await prisma.promptRequest.count();
 
-    allRecordsCompleted = completedRecordsCount === allRecordsCount;
-  } catch (e) {
-    allRecordsCompleted = false;
-  }
+  const allRecordsCompleted = completedRecordsCount === allRecordsCount;
 
   if (!allRecordsCompleted) {
     await processDataCollection(openai, logFolderPath)
