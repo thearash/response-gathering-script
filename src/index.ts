@@ -128,11 +128,11 @@ async function processDataCollection(openai: OpenAIApi, logFolderPath: string) {
   })
 
   if (promptRequests.length !== 0) {
-    await Promise.all(promptRequests.map(async (promptRequest) => {
+    await Promise.all(promptRequests.map(async (promptRequest: { id: string, teamName: string, character: string, prompt: string, trial: number, characterFolderPath: string }) => {
       const { id, teamName, character, prompt, trial, characterFolderPath } = promptRequest
       try {
         await collectData(openai, prompt, characterFolderPath, logFolderPath, teamName, character, trial)
-        delay(7000)
+        delay(5000)
       } catch (e) {
       } finally {
         await prisma.promptRequest.update({
@@ -170,21 +170,25 @@ async function collectData(openai: OpenAIApi, prompt: string, characterFolderPat
       }]
     })
     response = completion.data.choices[0].message?.content?.toString() || ''
+
+    if (response.length === 0) {
+      const errorLog = `[${new Date().toISOString()}] Processing - team: ${teamName} - character: ${character} - trial: ${trialNumber} - error: empty response`
+      await appendLog(logFolderPath, CURRENT_STAGE, errorLog)
+    }
+
+    const trialLog = `[${new Date().toISOString()}] Processing - team: ${teamName} - character: ${character} - trial: ${trialNumber} - Success`
+    await appendLog(logFolderPath, CURRENT_STAGE, trialLog)
+
+    const filePath = path.posix.join(characterFolderPath, `${teamName}_${character}_${trialNumber}.txt`)
+    await fs.promises.writeFile(filePath, response)
   } catch (e) {
     const errorLog = `[${new Date().toISOString()}] Processing - team: ${teamName} - character: ${character} - trial: ${trialNumber} - error: ${e}`
     await appendLog(logFolderPath, CURRENT_STAGE, errorLog)
+    if (e!.toString().includes("500") || e!.toString().includes("501") || e!.toString().includes("502") || e!.toString().includes("503") || e!.toString().includes("504") || e!.toString().includes("getaddrinfo ENOTFOUND")) {
+      delay(1000)
+      await collectData(openai, prompt, characterFolderPath, logFolderPath, teamName, character, trialNumber)
+    }
   }
-
-  if (response.length === 0) {
-    const errorLog = `[${new Date().toISOString()}] Processing - team: ${teamName} - character: ${character} - trial: ${trialNumber} - error: empty response`
-    await appendLog(logFolderPath, CURRENT_STAGE, errorLog)
-  }
-
-  const trialLog = `[${new Date().toISOString()}] Processing - team: ${teamName} - character: ${character} - trial: ${trialNumber} - Success`
-  await appendLog(logFolderPath, CURRENT_STAGE, trialLog)
-
-  const filePath = path.posix.join(characterFolderPath, `${teamName}_${character}_${trialNumber}.txt`)
-  await fs.promises.writeFile(filePath, response)
 }
 
 main().then(async () => {
